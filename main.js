@@ -21,6 +21,9 @@ window.addEventListener("load", draw);
 
 function draw() {
   // LOGIC - test if mouse in circles
+  if (ptnCircle(mouseX, mouseY, 150, 150, 100)) {
+    document.styleSheets.backgroundColor = "red"
+  } 
 
   // DRAW - draw circles
   ctx.clearRect(0, 0, cnv.width, cnv.height);
@@ -51,6 +54,8 @@ function mousemoveHandler(e) {
   // Calc mouse coordinates using mouse event and canvas location info
   mouseX = Math.round(e.clientX - cnvRect.left);
   mouseY = Math.round(e.clientY - cnvRect.top);
+
+  
 }
 
 // Helper Functions
@@ -58,4 +63,12 @@ function fillCircle(x, y, r) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
   ctx.fill();
+}
+
+function ptnCircle(x1, y1, x, y, r) {
+ if (x1 > x && x1 < x * r && y1 > y && y1 < y * r) {
+  return true
+ } else {
+  return false
+ }
 }
