@@ -22,8 +22,23 @@ window.addEventListener("load", draw);
 function draw() {
   // LOGIC - test if mouse in circles
   if (ptnCircle(mouseX, mouseY, 150, 150, 100)) {
-    document.styleSheets.backgroundColor = "red"
-  } 
+    document.body.style.backgroundColor = "red"
+  } else if 
+  (ptnCircle(mouseX, mouseY, 475, 125, 60)) {
+    document.body.style.backgroundColor = "green"
+  } else if 
+  (ptnCircle(mouseX, mouseY, 350, 275, 40)) {
+    document.body.style.backgroundColor = "blue"
+  }
+
+  if (ptnCircle(mouseX, mouseY, blackCircle.x, blackCircle.y , blackCircle.r)) {
+    document.body.style.backgroundColor = "white"
+    blackCircle = {
+      x: Math.random() * cnv.width,
+      y: Math.random() * cnv.height,
+      r: Math.random() * 50 + 10,
+    };
+  }
 
   // DRAW - draw circles
   ctx.clearRect(0, 0, cnv.width, cnv.height);
@@ -66,9 +81,24 @@ function fillCircle(x, y, r) {
 }
 
 function ptnCircle(x1, y1, x, y, r) {
- if (x1 > x && x1 < x * r && y1 > y && y1 < y * r) {
-  return true
- } else {
-  return false
- }
+  let xdist;
+  let ydist;
+  let dist;
+  if (x1 >= x) {
+    xdist = x1 - x;
+  } else {
+    xdist = x - x1;
+  }
+  if (y1 >= y) {
+    ydist = y1 - y;
+  } else {
+    ydist = y - y1;
+  }
+  dist = Math.sqrt(xdist ** 2 + ydist ** 2);
+  if (dist < r) {
+    return true;
+  } else {
+    return false;
+  }
 }
+
